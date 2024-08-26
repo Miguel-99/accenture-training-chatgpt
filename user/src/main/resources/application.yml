@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: user
+
+server:
+  port: 9000
+
+openapi:
+  service:
+    title: user docs
+    version: 1.0.0
+    url: /user
+    description: User Service through API Gateway
+
+
+springdoc:
+  api-docs:
+    path: /user/v3/api-docs

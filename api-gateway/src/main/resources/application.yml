@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**, /auth/v3/api-docs
+
+        - id: wallet
+          uri: lb://wallet
+          predicates:
+            - Path=/wallet/**, /wallet/v3/api-docs
+
+        - id: question
+          uri: lb://question
+          predicates:
+            - Path=/question/**, /question/v3/api-docs
+
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/user/**, /user/v3/api-docs
+
+      default-filters:
+        - StripPrefix=1
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /user/v3/api-docs
+        name: User Service
+
+server:
+  port: 8080
